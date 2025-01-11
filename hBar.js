@@ -85,9 +85,8 @@ function togglePayButton() {
 }
 
 function proceedToPay() {
-    const cartItems = document.getElementById('cart-items').children.length;
-    if (cartItems > 0 && document.getElementById('cod-option').checked) {
-        window.location.href = 'Payment.html';
+    showPage('checkout');
+    displayOrderSummary();
     } else {
         alert('Please add items to your cart and select Cash on Delivery before proceeding.');
     }
@@ -103,6 +102,47 @@ function searchProducts() {
             productDiv.style.display = 'block';
         } else {
             productDiv.style.display = 'none';
+        }
+    });
+}
+
+function displayOrderSummary() {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const orderSummaryDiv = document.getElementById('order-summary');
+    orderSummaryDiv.innerHTML = '';
+
+    cartItems.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.innerHTML = `
+            <p>Product Name: ${item.name}</p>
+            <p>Color: ${item.color}</p>
+            <p>Quantity: ${item.quantity}</p>
+            <p>Price: $${item.price}</p>
+        `;
+        orderSummaryDiv.appendChild(itemDiv);
+    });
+}
+
+function submitOrder(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    
+    const orderData = {
+        name: formData.get('name'),
+        address: formData.get('address'),
+        phone: formData.get('phone'),
+        cartItems: JSON.parse(localStorage.getItem('cartItems')) || []
+    };
+
+    fetch('https://script.google.com/macros/s/YOUR_DEPLOYED_ID/exec', {
+        method: 'POST',
+        body: JSON.stringify(orderData),
+        headers: { 'Content-Type': 'application/json' }
+    }).then(response => {
+        if (response.ok) {
+            alert('Order submitted successfully!');
+        } else {
+            alert('Failed to submit the order.');
         }
     });
 }
