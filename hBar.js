@@ -15,9 +15,9 @@ function showPage(pageId) {
 
 function displayProducts() {
     const products = [
-        { id: 1, name: 'Product 1', price: 100, image: 'product1.jpg' },
-        { id: 2, name: 'Product 2', price: 200, image: 'product2.jpg' },
-        // Add more products as needed
+        { id: 1, name: 'Product 1', price: 100, image: 'product1.jpg', quantity: 10, colors: ['White', 'Black', 'Red'] },
+        { id: 2, name: 'Product 2', price: 200, image: 'product2.jpg', quantity: 5, colors: ['White', 'Blue', 'Green'] },
+        { id: 3, name: 'Product 3', price: 300, image: 'product3.jpg', quantity: 8, colors: ['White', 'Yellow', 'Pink'] },
     ];
     const productList = document.getElementById('product-list');
     productList.innerHTML = '';
@@ -29,42 +29,49 @@ function displayProducts() {
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>Price: $${product.price}</p>
+            <p>Available Quantity: ${product.quantity}</p>
+            <label for="quantity-${product.id}">Quantity:</label>
+            <select id="quantity-${product.id}">
+                ${Array.from({ length: product.quantity }, (_, i) => `<option value="${i + 1}">${i + 1}</option>`).join('')}
+            </select>
+            <label for="color-${product.id}">Color:</label>
+            <select id="color-${product.id}">
+                ${product.colors.map(color => `<option value="${color}">${color}</option>`).join('')}
+            </select>
             <button onclick="addToCart(${product.id}, '${product.name}', ${product.price})">Add to Cart</button>
         `;
         productList.appendChild(productDiv);
     });
 }
 
-function searchProducts() {
-    const searchQuery = document.getElementById('search-box').value.toLowerCase();
-    const products = document.querySelectorAll('.product');
-    products.forEach(product => {
-        const productName = product.querySelector('h3').innerText.toLowerCase();
-        if (productName.includes(searchQuery)) {
-            product.style.display = 'block';
-        } else {
-            product.style.display = 'none';
-        }
-    });
-}
-
 function addToCart(productId, productName, productPrice) {
+    const quantity = document.getElementById(`quantity-${productId}`).value;
+    const color = document.getElementById(`color-${productId}`).value;
     const cartItems = document.getElementById('cart-items');
     const cartItem = document.createElement('div');
     cartItem.className = 'cart-item';
     cartItem.innerHTML = `
-        <p>${productName} - $${productPrice}</p>
+        <p>${productName} - $${productPrice} x ${quantity} (Color: ${color})</p>
     `;
     cartItems.appendChild(cartItem);
+    updatePayButtonState();
+}
+
+function updatePayButtonState() {
+    const cartItems = document.getElementById('cart-items').children.length;
+    document.getElementById('pay-button').disabled = cartItems === 0;
 }
 
 function togglePayButton() {
     const codOption = document.getElementById('cod-option').checked;
-    document.getElementById('pay-button').disabled = !codOption;
+    updatePayButtonState();
 }
 
 function proceedToPay() {
-    if (document.getElementById('cod-option').checked) {
+    const cartItems = document.getElementById('cart-items').children.length;
+    if (cartItems > 0 && document.getElementById('cod-option').checked) {
         window.location.href = 'idd.html';
+    } else {
+        alert('Please add items to your cart and select Cash on Delivery before proceeding.');
     }
 }
