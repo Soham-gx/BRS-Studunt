@@ -32,27 +32,9 @@
         <div id="home" class="page">Welcome to the Home Page</div>
         <div id="store" class="page" style="display: none;">Welcome to the Store Page</div>
         <div id="cart" class="page" style="display: none;">Your Cart is Empty</div>
-        <div id="account" class="page" style="display: none;">
-            <h2>Account Settings</h2>
-            <div class="profile-section">
-                <label for="profile-image">Profile Image:</label>
-                <img id="profile-image" alt="Profile Image" />
-                <input type="file" id="upload-image" onchange="changeProfileImage(event)" />
-            </div>
-            <div class="profile-section">
-                <label for="username">Username:</label>
-                <input type="text" id="username" />
-                <button onclick="changeUsername()">Change Username</button>
-            </div>
-            <div class="profile-section">
-                <label for="old-password">Old Password:</label>
-                <input type="password" id="old-password" />
-                <label for="new-password">New Password:</label>
-                <input type="password" id="new-password" />
-                <label for="re-enter-password">Re-enter New Password:</label>
-                <input type="password" id="re-enter-password" />
-                <button onclick="changePassword()">Change Password</button>
-            </div>
+        <div id="account" class="page" style="display: none;">Your Account</div>
+            
+            <p>Username: <span id="account-username"></span></p>
         </div>
     </div>
 
