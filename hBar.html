@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout Page</title>
+    <title>Navigation Bar</title>
     <link rel="stylesheet" href="hBar.css">
 </head>
 <body>
@@ -29,39 +29,31 @@
         </a>
     </div>
     <div id="content">
-        <div id="cart" class="page">
-            <h2>Your Cart</h2>
-            <div id="cart-items">
-                <!-- Cart items will be dynamically added here -->
-            </div>
-            <div id="cart-summary">
-                <input type="checkbox" id="cod-option" onchange="togglePayButton()">
-                <label for="cod-option">Cash on Delivery</label>
-                <span id="total-amount">$0.00</span>
-                <button id="pay-button" onclick="proceedToPay()" disabled>Proceed to Pay</button>
+        <div id="home" class="page">Welcome to the Home Page</div>
+        <div id="store" class="page" style="display: none;">
+            <h2>Store</h2>
+            <input type="text" id="search-box" placeholder="Search for products..." onkeyup="searchProducts()">
+            <div id="product-list">
+                <!-- Products will be dynamically added here -->
             </div>
         </div>
-        
-        <div id="address-form" style="display: none;">
-            <h2>Enter Your Address</h2>
-            <form onsubmit="submitForm(event)">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-                
-                <label for="address">Address:</label>
-                <textarea id="address" name="address" required></textarea>
-                
-                <label for="phone">Phone Number:</label>
-                <input type="text" id="phone" name="phone" required>
-                
-                <h3>Order Summary</h3>
-                <div id="order-summary">
-                    <!-- Order details will be populated here -->
-                </div>
-                
-                <p><strong>Grand Total: $<span id="grand-total">0.00</span></strong></p>
-                <button type="submit">Submit</button>
-            </form>
+        <div id="cart" class="page" style="display: none;">
+            <h2>Your Cart</h2>
+           <div id="cart-items">
+    <!-- Cart items will be dynamically added here -->
+</div>
+
+<div id="cart-summary">
+    <input type="checkbox" id="cod-option" onchange="togglePayButton()">
+    <label for="cod-option">Cash on Delivery</label>
+    <span id="total-amount">$0</span>
+    <button id="pay-button" onclick="proceedToPay()" disabled>Proceed to Pay</button>
+</div>
+          
+        </div>
+        <div id="account" class="page" style="display: none;">
+            <h2>Your Account</h2>
+            <p>Username: <span id="account-username"></span></p>
         </div>
     </div>
 
@@ -69,15 +61,3 @@
     <script src="hBar.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
