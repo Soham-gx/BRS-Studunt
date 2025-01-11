@@ -43,7 +43,7 @@ function submitForm(event) {
     .then(response => response.text())
     .then(data => {
         alert('Order submitted successfully!');
-        window.location.href = '/thank-you.html'; // Redirect to a thank-you page
+        window.location.href = 'OrderS.html'; // Redirect to a thank-you page
     })
     .catch(error => {
         console.error('Error:', error);
