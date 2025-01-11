@@ -51,11 +51,20 @@ function addToCart(productId, productName, productPrice) {
     const cartItem = document.createElement('div');
     cartItem.className = 'cart-item';
     cartItem.innerHTML = `
-        <p>${productName} - $${productPrice} x ${quantity} (Color: ${color})</p>
+        <p>${productName} - $${productPrice} x ${quantity} (Color: ${color})
+            <button class="remove-btn" onclick="removeFromCart(this, ${productPrice * quantity})">X</button>
+        </p>
     `;
     cartItems.appendChild(cartItem);
 
     updateTotalAmount(productPrice * quantity);
+    updatePayButtonState();
+}
+
+function removeFromCart(button, amount) {
+    const cartItem = button.parentElement.parentElement;
+    cartItem.remove();
+    updateTotalAmount(-amount);
     updatePayButtonState();
 }
 
