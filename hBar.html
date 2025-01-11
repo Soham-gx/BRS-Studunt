@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Bar</title>
+    <link rel="stylesheet" href="hBar.css">
+</head>
+<body>
+    <div class="header">
+        <span id="username-display"></span>
+        <button id="logout-button" onclick="logout()">Logout</button>
+    </div>
+    <div class="navbar">
+        <a href="#home" class="nav-item" onclick="showPage('home')">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#store" class="nav-item" onclick="showPage('store')">
+            <i class="fas fa-store"></i>
+            <span>Store</span>
+        </a>
+        <a href="#cart" class="nav-item" onclick="showPage('cart')">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Cart</span>
+        </a>
+        <a href="#account" class="nav-item" onclick="showPage('account')">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+        </a>
+    </div>
+    <div id="content">
+        <div id="home" class="page">Welcome to the Home Page</div>
+        <div id="store" class="page" style="display: none;">Welcome to the Store Page</div>
+        <div id="cart" class="page" style="display: none;">Your Cart is Empty</div>
+        <div id="account" class="page" style="display: none;">Account Information</div>
+    </div>
 
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="hBar.js"></script>
+</body>
+</html>
