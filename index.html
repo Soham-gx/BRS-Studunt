@@ -4,30 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup and Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="form-container">
-        <div id="signup-form">
+        <div id="signup-form" style="display: none;">
             <h2>Signup</h2>
             <input type="text" id="signup-username" placeholder="Username" required>
             <input type="password" id="signup-password" placeholder="Password" required>
             <button onclick="signup()">Signup</button>
-            <p>Already have an account? <a href="#" onclick="showLoginForm()">Login here</a></p>
+            <p>Already have an account? <a href="#" onclick="showLoginForm()">Login here</a>.</p>
         </div>
-        <div id="login-form" style="display: none;">
+        <div id="login-form">
             <h2>Login</h2>
             <input type="text" id="login-username" placeholder="Username" required>
             <input type="password" id="login-password" placeholder="Password" required>
             <button onclick="login()">Login</button>
-             <p>If you not have an account <a href="#" onclick="showSinupForm()">Singup Now</a></p>
+            <p>If you do not have an account, <a href="#" onclick="showSignupForm()">sign up now</a>.</p>
         </div>
-    </div>
-
-    <div id="profile-page" style="display: none;">
-        <h2>Welcome, <span id="profile-username"></span>!</h2>
-        <div id="profile-image"></div>
-        <button onclick="logout()">Logout</button>
     </div>
 
     <script src="script.js"></script>
