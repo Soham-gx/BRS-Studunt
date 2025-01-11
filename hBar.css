@@ -10,29 +10,21 @@ body {
     background-color: #333;
     color: white;
     padding: 10px;
-    text-align: right;
-    font-size: 1.2em;
+    text-align: center;
 }
 
 .navbar {
     display: flex;
     background-color: #444;
-    padding: 10px;
     justify-content: space-around;
+    padding: 10px 0;
 }
 
 .nav-item {
     color: white;
     text-decoration: none;
     padding: 10px 20px;
-    text-align: center;
-    font-size: 1.1em;
-    transition: background-color 0.3s;
-}
-
-.nav-item:hover {
-    background-color: #555;
-    border-radius: 5px;
+    font-size: 1em;
 }
 
 #content {
@@ -47,76 +39,55 @@ body {
 
 #search-box {
     width: 100%;
-    padding: 15px;
+    padding: 10px;
     font-size: 1em;
     margin-bottom: 20px;
-    box-sizing: border-box;
     border: 1px solid #ccc;
-    border-radius: 5px;
 }
 
 #product-list {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .product {
     background-color: white;
     border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 15px;
-    margin: 10px;
     width: 30%;
-    box-sizing: border-box;
     text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.product:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
 }
 
 .product img {
     width: 100%;
     height: auto;
-    border-radius: 10px;
 }
 
 .product h3 {
-    font-size: 1.2em;
+    font-size: 1.1em;
     margin: 10px 0;
 }
 
 .product p {
-    font-size: 1em;
+    font-size: 0.9em;
     color: #666;
-    margin-bottom: 15px;
 }
 
 .product button {
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    border-radius: 5px;
+    padding: 10px 15px;
     cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.product button:hover {
-    background-color: #0056b3;
 }
 
 /* Cart Page Styles */
 #cart-items {
     background-color: white;
     border: 1px solid #ddd;
-    border-radius: 10px;
     padding: 15px;
     margin-bottom: 20px;
 }
@@ -131,14 +102,7 @@ body {
     color: white;
     border: none;
     padding: 10px 20px;
-    font-size: 1em;
-    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#pay-button:hover:enabled {
-    background-color: #218838;
 }
 
 #pay-button:disabled {
@@ -148,18 +112,4 @@ body {
 
 #cod-option {
     margin-right: 10px;
-    transform: scale(1.5);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .product {
-        width: 45%;
-    }
-}
-
-@media (max-width: 480px) {
-    .product {
-        width: 100%;
-    }
 }
