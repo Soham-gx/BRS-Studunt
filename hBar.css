@@ -113,3 +113,16 @@ body {
 #cod-option {
     margin-right: 10px;
 }
+
+/* Disabled Pay Button */
+#pay-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Message Styling */
+#cart-message {
+    color: red;
+    font-weight: bold;
+    display: none;
+}
