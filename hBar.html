@@ -39,21 +39,39 @@
         </div>
         <div id="cart" class="page" style="display: none;">
             <h2>Your Cart</h2>
-           <div id="cart-items">
-    <!-- Cart items will be dynamically added here -->
-</div>
-
-<div id="cart-summary">
-    <input type="checkbox" id="cod-option" onchange="togglePayButton()">
-    <label for="cod-option">Cash on Delivery</label>
-    <span id="total-amount">$0</span>
-    <button id="pay-button" onclick="proceedToPay()" disabled>Proceed to Pay</button>
-</div>
-          
+            <div id="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            <div id="cart-summary">
+                <input type="checkbox" id="cod-option" onchange="togglePayButton()">
+                <label for="cod-option">Cash on Delivery</label>
+                <span id="total-amount">$0</span>
+                <button id="pay-button" onclick="proceedToPay()" disabled>Proceed to Pay</button>
+            </div>
         </div>
         <div id="account" class="page" style="display: none;">
             <h2>Your Account</h2>
             <p>Username: <span id="account-username"></span></p>
+        </div>
+        <div id="checkout" class="page" style="display: none;">
+            <h2>Enter Your Address</h2>
+            <form id="checkout-form" onsubmit="submitOrder(event)">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" required></textarea>
+                
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" name="phone" required>
+                
+                <h3>Order Summary</h3>
+                <div id="order-summary">
+                    <!-- Order summary will be displayed here -->
+                </div>
+                
+                <button type="submit">Submit</button>
+            </form>
         </div>
     </div>
 
