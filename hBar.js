@@ -87,7 +87,7 @@ function togglePayButton() {
 function proceedToPay() {
     const cartItems = document.getElementById('cart-items').children.length;
     if (cartItems > 0 && document.getElementById('cod-option').checked) {
-        window.location.href = 'idd.html';
+        window.location.href = 'Payment.html';
     } else {
         alert('Please add items to your cart and select Cash on Delivery before proceeding.');
     }
