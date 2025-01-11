@@ -54,12 +54,20 @@ function addToCart(productId, productName, productPrice) {
         <p>${productName} - $${productPrice} x ${quantity} (Color: ${color})</p>
     `;
     cartItems.appendChild(cartItem);
+
+    updateTotalAmount(productPrice * quantity);
     updatePayButtonState();
+}
+
+function updateTotalAmount(amount) {
+    let currentTotal = parseFloat(document.getElementById('total-amount').innerText.replace('$', ''));
+    currentTotal += amount;
+    document.getElementById('total-amount').innerText = `$${currentTotal.toFixed(2)}`;
 }
 
 function updatePayButtonState() {
     const cartItems = document.getElementById('cart-items').children.length;
-    document.getElementById('pay-button').disabled = cartItems === 0;
+    document.getElementById('pay-button').disabled = cartItems === 0 || !document.getElementById('cod-option').checked;
 }
 
 function togglePayButton() {
