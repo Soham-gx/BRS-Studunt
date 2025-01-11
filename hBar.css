@@ -174,3 +174,30 @@ body {
     font-weight: bold;
     display: none;
 }
+
+
+
+
+#checkout-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#checkout-form label {
+    margin-top: 10px;
+}
+
+#checkout-form input, #checkout-form textarea {
+    margin-top: 5px;
+    padding: 10px;
+    width: 100%;
+}
+
+#checkout-form button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
