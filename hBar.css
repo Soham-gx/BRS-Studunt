@@ -147,6 +147,21 @@ body {
     margin-right: 10px;
 }
 
+.remove-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.remove-btn:hover {
+    background: darkred;
+}
+
+
 /* Disabled Pay Button */
 #pay-button:disabled {
     background-color: #ccc;
