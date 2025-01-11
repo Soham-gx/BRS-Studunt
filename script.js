@@ -28,7 +28,7 @@ function login() {
     if (username === storedUsername && password === storedPassword) {
         alert('Login successful!');
         localStorage.setItem('loggedIn', 'true'); // Set loggedIn status
-        showProfilePage(username);
+        window.location.href = 'hBar.html'; // Redirect to hBar.html after login
     } else {
         alert('Invalid username or password.');
     }
@@ -43,21 +43,11 @@ function logout() {
 function showSignupForm() {
     document.getElementById('signup-form').style.display = 'block';
     document.getElementById('login-form').style.display = 'none';
-    document.getElementById('profile-page').style.display = 'none';
 }
 
 function showLoginForm() {
     document.getElementById('signup-form').style.display = 'none';
     document.getElementById('login-form').style.display = 'block';
-    document.getElementById('profile-page').style.display = 'none';
-}
-
-function showProfilePage(username) {
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('profile-page').style.display = 'block';
-
-    document.getElementById('profile-username').innerText = username;
-    document.getElementById('profile-image').innerText = username.charAt(0).toUpperCase();
 }
 
 // Check if user is already logged in
@@ -65,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const username = localStorage.getItem('username');
     const loggedIn = localStorage.getItem('loggedIn');
     if (username && loggedIn === 'true') {
-        showProfilePage(username);
+        window.location.href = 'hBar.html'; // Redirect to hBar.html if already logged in
     } else {
         document.getElementById('signup-form').style.display = 'block';
     }
