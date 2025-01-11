@@ -30,11 +30,26 @@
     </div>
     <div id="content">
         <div id="home" class="page">Welcome to the Home Page</div>
-        <div id="store" class="page" style="display: none;">Welcome to the Store Page</div>
-        <div id="cart" class="page" style="display: none;">Your Cart is Empty</div>
-        <div id="account" class="page" style="display: none;">Your Account</div>
-            
-            
+        <div id="store" class="page" style="display: none;">
+            <h2>Store</h2>
+            <input type="text" id="search-box" placeholder="Search for products..." onkeyup="searchProducts()">
+            <div id="product-list">
+                <!-- Products will be dynamically added here -->
+            </div>
+        </div>
+        <div id="cart" class="page" style="display: none;">
+            <h2>Your Cart</h2>
+            <div id="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            <div>
+                <input type="checkbox" id="cod-option" onclick="togglePayButton()"> Cash on Delivery
+            </div>
+            <button id="pay-button" onclick="proceedToPay()" disabled>Proceed to Pay</button>
+        </div>
+        <div id="account" class="page" style="display: none;">
+            <h2>Your Account</h2>
+            <p>Username: <span id="account-username"></span></p>
         </div>
     </div>
 
