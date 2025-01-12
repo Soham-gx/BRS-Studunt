@@ -51,20 +51,11 @@ function addToCart(productId, productName, productPrice) {
     const cartItem = document.createElement('div');
     cartItem.className = 'cart-item';
     cartItem.innerHTML = `
-        <p>${productName} - $${productPrice} x ${quantity} (Color: ${color})
-            <button class="remove-btn" onclick="removeFromCart(this, ${productPrice * quantity})">X</button>
-        </p>
+        <p>${productName} - $${productPrice} x ${quantity} (Color: ${color})</p>
     `;
     cartItems.appendChild(cartItem);
 
     updateTotalAmount(productPrice * quantity);
-    updatePayButtonState();
-}
-
-function removeFromCart(button, amount) {
-    const cartItem = button.parentElement.parentElement;
-    cartItem.remove();
-    updateTotalAmount(-amount);
     updatePayButtonState();
 }
 
@@ -85,24 +76,10 @@ function togglePayButton() {
 }
 
 function proceedToPay() {
-    showPage('checkout');
-    displayOrderSummary();
+    const cartItems = document.getElementById('cart-items').children.length;
+    if (cartItems > 0 && document.getElementById('cod-option').checked) {
+        window.location.href = 'idd.html';
     } else {
         alert('Please add items to your cart and select Cash on Delivery before proceeding.');
     }
 }
-
-function searchProducts() {
-    const searchTerm = document.getElementById('search-box').value.toLowerCase();
-    const productDivs = document.querySelectorAll('#product-list .product');
-
-    productDivs.forEach(productDiv => {
-        const productName = productDiv.querySelector('h3').innerText.toLowerCase();
-        if (productName.includes(searchTerm)) {
-            productDiv.style.display = 'block';
-        } else {
-            productDiv.style.display = 'none';
-        }
-    });
-}
-
