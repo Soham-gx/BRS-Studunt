@@ -100,28 +100,29 @@ body {
 
 #cart-summary {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: space-between;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 15px;
+    margin-bottom: 10px;
 }
 
 #cod-option {
     margin-right: 10px;
     transform: scale(1.5);
-    margin-bottom: 10px;
 }
 
 #total-amount {
     font-size: 1.2em;
     font-weight: bold;
     color: #333;
-    margin-bottom: 10px;
 }
 
 #pay-button {
+    display: block;
+    margin: 0 auto;
     background-color: #28a745;
     color: white;
     border: none;
@@ -130,8 +131,6 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    align-self: center;
-    margin-top: 10px;
 }
 
 #pay-button:hover:enabled {
@@ -143,61 +142,9 @@ body {
     cursor: not-allowed;
 }
 
-#cod-option {
-    margin-right: 10px;
-}
-
-.remove-btn {
-    background: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    margin-left: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.remove-btn:hover {
-    background: darkred;
-}
-
-
-/* Disabled Pay Button */
-#pay-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
 /* Message Styling */
 #cart-message {
     color: red;
     font-weight: bold;
     display: none;
-}
-
-
-
-
-#checkout-form {
-    display: flex;
-    flex-direction: column;
-}
-
-#checkout-form label {
-    margin-top: 10px;
-}
-
-#checkout-form input, #checkout-form textarea {
-    margin-top: 5px;
-    padding: 10px;
-    width: 100%;
-}
-
-#checkout-form button {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    cursor: pointer;
 }
