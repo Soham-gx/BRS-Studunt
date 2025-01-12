@@ -1,3 +1,7 @@
+JS-
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const username = localStorage.getItem('username');
     document.getElementById('username-display').innerText = `Welcome, ${username}`;
@@ -76,35 +80,9 @@ function togglePayButton() {
 }
 
 function proceedToPay() {
-    const cartItems = document.querySelectorAll('#cart-items .cart-item');
-    if (cartItems.length > 0 && document.getElementById('cod-option').checked) {
-        cartItems.forEach(item => {
-            const [namePrice, quantityColor] = item.innerText.split(' x ');
-            const name = namePrice.split(' - ')[0].trim();
-            const price = parseFloat(namePrice.split(' - ')[1].replace('$', '').trim());
-            const quantity = parseInt(quantityColor.match(/\d+/)[0]);
-            const color = quantityColor.match(/\(Color: (.+)\)/)[1].trim();
-            
-            fetch('YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    productName: name,
-                    productPrice: price,
-                    productQuantity: quantity,
-                    productColor: color
-                })
-            })
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.error('Error:', error));
-        });
-
-        setTimeout(() => {
-            window.location.href = 'Payment.html';
-        }, 1000); // Delay to ensure data is saved before redirection
+    const cartItems = document.getElementById('cart-items').children.length;
+    if (cartItems > 0 && document.getElementById('cod-option').checked) {
+        window.location.href = 'idd.html';
     } else {
         alert('Please add items to your cart and select Cash on Delivery before proceeding.');
     }
