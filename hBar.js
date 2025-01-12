@@ -1,5 +1,3 @@
-JS-
-
 
 
 document.addEventListener('DOMContentLoaded', () => {
