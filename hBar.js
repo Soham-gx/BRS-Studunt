@@ -75,11 +75,37 @@ function togglePayButton() {
     updatePayButtonState();
 }
 
-function proceedToPay() {
-    const cartItems = document.getElementById('cart-items').children.length;
-    if (cartItems > 0 && document.getElementById('cod-option').checked) {
-        window.location.href = 'idd.html';
+
+    
+    function proceedToPay() {
+    const cartItems = document.querySelectorAll('#cart-items .cart-item');
+    if (cartItems.length > 0 && document.getElementById('cod-option').checked) {
+        cartItems.forEach(item => {
+            const [name, price, quantityColor] = item.innerText.split(' - ');
+            const [quantity, color] = quantityColor.match(/\d+/g).concat(quantityColor.match(/\(Color: (.+)\)/)[1]);
+            
+            fetch('YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    productName: name.trim(),
+                    productPrice: parseFloat(price.replace('$', '')),
+                    productQuantity: parseInt(quantity),
+                    productColor: color.trim()
+                })
+            })
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.error('Error:', error));
+        });
+
+        setTimeout(() => {
+            window.location.href = 'Payment.html';
+        }, 1000); // Delay to ensure data is saved before redirection
     } else {
         alert('Please add items to your cart and select Cash on Delivery before proceeding.');
     }
+}
 }
