@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <link rel="stylesheet" href="CartPage.css">
+</head>
+<body>
+    <div class="cart-container">
+        <h2>Your Cart</h2>
+        <div id="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div id="cart-summary">
+            <input type="checkbox" id="cod-option" onchange="togglePayButton()">
+            <label for="cod-option">Cash on Delivery</label>
+            <span id="total-amount">$0</span>
+        </div>
+        <button id="pay-button" onclick="proceedToPay()" disabled>Proceed to Pay</button>
+    </div>
+
+    <script src="cartPage.js"></script>
+</body>
+</html>
