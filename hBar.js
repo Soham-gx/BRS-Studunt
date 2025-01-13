@@ -96,7 +96,7 @@ function displayAddressForm() {
     const cartItems = document.getElementById('cart-items').children;
     orderDetails.innerHTML = '';
     Array.from(cartItems).forEach(item => {
-        orderDetails.innerHTML += `<p>${item.innerHTML}</p>`;
+        orderDetails.innerHTML += `<p>${item.textContent}</p>`;
     });
 
     document.getElementById('order-form').onsubmit = submitOrder;
