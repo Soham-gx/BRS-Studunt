@@ -86,48 +86,6 @@ function togglePayButton() {
     } else {
         alert('Please add items to your cart and select Cash on Delivery before proceeding.');
     }
-}
-
-function displayAddressForm() {
-    document.getElementById('address-form').style.display = 'block';
-    document.getElementById('cart').style.display = 'none'; // Hide cart page
-
-    const orderDetails = document.getElementById('order-details');
-    const cartItems = document.getElementById('cart-items').children;
-    orderDetails.innerHTML = '';
-    Array.from(cartItems).forEach(item => {
-        orderDetails.innerHTML += `<p>${item.textContent}</p>`;
-    });
-
-    document.getElementById('order-form').onsubmit = submitOrder;
-}
-
-function submitOrder(event) {
-    event.preventDefault();
-    
-    const name = document.getElementById('name').value;
-    const address = document.getElementById('address').value;
-    const phone = document.getElementById('phone').value;
-    const orderDetails = document.getElementById('order-details').innerText;
-
-    const orderData = {
-        name,
-        address,
-        phone,
-        orderDetails,
-    };
-
-    // Sending orderData to Google Sheets using Google Apps Script or any webhook URL
-    fetch('https://script.google.com/macros/s/your-google-script-url/exec', {
-        method: 'POST',
-        body: JSON.stringify(orderData),
-    }).then(response => {
-        if (response.ok) {
-            alert('Order submitted successfully!');
-        } else {
-            alert('There was an issue submitting your order. Please try again.');
-        }
-    });
-}
     
 }
+
