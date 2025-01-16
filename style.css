@@ -6,7 +6,7 @@ body, html {
     width: 100%;
     height: 100%;
     font-family: 'Poppins', sans-serif;
-    background: url('https://source.unsplash.com/1600x900/?nature,landscape') no-repeat center center/cover;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
     overflow: hidden;
 }
 
@@ -16,7 +16,7 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,19 +49,19 @@ body, html {
     padding: 15px 40px;
     font-size: 1.3rem;
     font-weight: 600;
-    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    background: linear-gradient(90deg, #ff6a00, #ee0979);
     color: white;
     border: none;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 15px rgba(255, 126, 95, 0.4);
+    box-shadow: 0 4px 15px rgba(238, 9, 121, 0.4);
 }
 
 .welcome-button:hover {
     transform: scale(1.1);
-    background: linear-gradient(90deg, #feb47b, #ff7e5f);
-    box-shadow: 0 6px 20px rgba(255, 126, 95, 0.6);
+    background: linear-gradient(90deg, #ee0979, #ff6a00);
+    box-shadow: 0 6px 20px rgba(238, 9, 121, 0.6);
 }
 
 @keyframes fadeInOverlay {
@@ -69,7 +69,7 @@ body, html {
         background-color: rgba(0, 0, 0, 0);
     }
     to {
-        background-color: rgba(0, 0, 0, 0.6);
+        background-color: rgba(0, 0, 0, 0.5);
     }
 }
 
