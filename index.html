@@ -3,27 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup and Login</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Welcome Page</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="form-container">
-        <div id="signup-form">
-            <h2>Signup</h2>
-            <input type="text" id="signup-username" placeholder="Username" required>
-            <input type="password" id="signup-password" placeholder="Password" required>
-            <button onclick="signup()">Signup</button>
-            <p>Already have an account? <a href="#" onclick="showLoginForm()">Login here</a>.</p>
-        </div>
-        <div id="login-form" style="display: none;">
-            <h2>Login</h2>
-            <input type="text" id="login-username" placeholder="Username" required>
-            <input type="password" id="login-password" placeholder="Password" required>
-            <button onclick="login()">Login</button>
-            <p>If you do not have an account, <a href="#" onclick="showSignupForm()">Sign up now</a>.</p>
-        </div>
+    <div class="welcome-container">
+        <h1 class="welcome-text">Welcome to Heera Telecom</h1>
+        <button class="welcome-button" onclick="navigateToLogin()">Login or Sign Up</button>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
