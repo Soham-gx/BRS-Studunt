@@ -1,13 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 body, html {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-family: 'Poppins', sans-serif;
     background: url('https://source.unsplash.com/1600x900/?nature,landscape') no-repeat center center/cover;
+    overflow: hidden;
 }
 
 .overlay {
@@ -16,48 +16,70 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    animation: fadeInOverlay 2s ease-in-out;
 }
 
 .welcome-content {
     text-align: center;
     color: white;
-    animation: fadeIn 2s ease-in-out;
+    animation: slideIn 2s ease-in-out;
 }
 
 .welcome-text {
-    font-size: 4rem;
+    font-size: 4.5rem;
+    font-weight: 600;
     margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 5px;
 }
 
 .sub-text {
-    margin: 10px 0 30px;
+    margin: 15px 0 40px;
     font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 1px;
 }
 
 .welcome-button {
-    padding: 15px 30px;
-    font-size: 1.2rem;
-    background-color: #ff9800;
+    padding: 15px 40px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
     color: white;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 15px rgba(255, 126, 95, 0.4);
 }
 
 .welcome-button:hover {
-    background-color: #e68900;
+    transform: scale(1.1);
+    background: linear-gradient(90deg, #feb47b, #ff7e5f);
+    box-shadow: 0 6px 20px rgba(255, 126, 95, 0.6);
 }
 
-@keyframes fadeIn {
+@keyframes fadeInOverlay {
     from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-100px);
         opacity: 0;
     }
     to {
+        transform: translateY(0);
         opacity: 1;
     }
 }
