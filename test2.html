@@ -64,6 +64,14 @@
                 display: none;
             }
         }
+        .product-controls button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background-color: #4a3aff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -72,50 +80,27 @@
             <img src="your-logo-path.jpg" alt="Heera Telecom Logo">
             <h1>Heera Telecom</h1>
         </div>
-        <div class="details">
-            <table>
-                <tr>
-                    <td><strong>Shop Name:</strong> Heera Telecom</td>
-                    <td><strong>GSTIN No:</strong> 1234567890</td>
-                </tr>
-                <tr>
-                    <td><strong>Address:</strong> 123, Main Street, City, State</td>
-                     <td><strong>Invoice No.</strong> <span id="invoiceNo"></span></td>
-                </tr>
-                <tr>
-                    <td><strong>Phone Number:</strong> +91-9876543210</td>
-                </tr>
-            </table>
-        </div>
+        
+        <!-- Product Details Form -->
+        <div class="product-details">
+            <h3>Product Details</h3>
+            <div id="productContainer">
+                <div class="product-details-input">
+                    <label for="productName">Product Name:</label>
+                    <input type="text" name="productName[]" required><br><br>
 
-        <div class="details">
-            <strong>Bill To:</strong>
-            <table>
-                <tr>
-                    <td><strong>Name:</strong> <span id="customerName"></span></td>
-                    <td><strong>Order Number:</strong> ###</td>
-                </tr>
-                <tr>
-                    <td><strong>Address:</strong> <span id="customerAddress"></span></td>
-                    <td><strong>Method Of Payment:</strong> <span id="paymentMethod"></span></td>
-                </tr>
-                <tr>
-                    <td><strong>Phone No:</strong> <span id="customerPhone"></span></td>
-                    <td><strong>Warranty Till Date:</strong> 12/12/2025</td>
-                </tr>
-            </table>
-        </div>
+                    <label for="brandName">Brand Name:</label>
+                    <input type="text" name="brandName[]" required><br><br>
 
-        <table class="items" id="itemsTable">
-            <tr>
-                <th>S.No</th>
-                <th>Product Name</th>
-                <th>Brand Name</th>
-                <th>QTY</th>
-                <th>MRP</th>
-                <th>Amount</th>
-            </tr>
-        </table>
+                    <label for="totalAmount">Total Amount:</label>
+                    <input type="text" name="totalAmount[]" required><br><br>
+                </div>
+            </div>
+            <div class="product-controls">
+                <button type="button" onclick="addProduct()">+</button>
+                <button type="button" onclick="removeProduct()">-</button>
+            </div>
+        </div>
 
         <div class="details">
             <table>
@@ -138,40 +123,31 @@
     </div>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
+        // Add a new product input field dynamically
+        function addProduct() {
+            const productContainer = document.getElementById('productContainer');
+            const newProduct = document.createElement('div');
+            newProduct.classList.add('product-details-input');
+            newProduct.innerHTML = `
+                <label for="productName">Product Name:</label>
+                <input type="text" name="productName[]" required><br><br>
 
-        // Fetching customer details from URL
-        document.getElementById('customerName').innerText = urlParams.get('customerName');
-        document.getElementById('customerAddress').innerText = urlParams.get('customerAddress');
-        document.getElementById('customerPhone').innerText = urlParams.get('customerPhone');
-        document.getElementById('paymentMethod').innerText = urlParams.get('paymentMethod');
-        document.getElementById('paymentModeDisplay').innerText = urlParams.get('paymentMethod');
-        document.getElementById('invoiceNo').innerText = urlParams.get('invoiceNo');
-        
-        // Fetching multiple product details from URL
-        let productNames = urlParams.getAll('productName[]');
-        let brandNames = urlParams.getAll('brandName[]');
-        let totalAmounts = urlParams.getAll('totalAmount[]');
+                <label for="brandName">Brand Name:</label>
+                <input type="text" name="brandName[]" required><br><br>
 
-        let totalAmount = 0;
-
-        // Looping through the products and adding them to the table
-        for (let i = 0; i < productNames.length; i++) {
-            let row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${i + 1}</td>
-                <td>${productNames[i]}</td>
-                <td>${brandNames[i]}</td>
-                <td>${totalAmounts[i]}</td>
-                <td>${totalAmounts[i]}</td>
+                <label for="totalAmount">Total Amount:</label>
+                <input type="text" name="totalAmount[]" required><br><br>
             `;
-            document.getElementById('itemsTable').appendChild(row);
-
-            totalAmount += parseFloat(totalAmounts[i]);  // Adding up the total amount
+            productContainer.appendChild(newProduct);
         }
 
-        // Setting total amount display
-        document.getElementById('totalAmountDisplay').innerText = totalAmount.toFixed(2);
+        // Remove the last product input field
+        function removeProduct() {
+            const productContainer = document.getElementById('productContainer');
+            if (productContainer.children.length > 1) {
+                productContainer.removeChild(productContainer.lastElementChild);
+            }
+        }
     </script>
 </body>
 </html>
