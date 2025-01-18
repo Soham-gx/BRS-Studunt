@@ -148,9 +148,9 @@
         document.getElementById('paymentModeDisplay').innerText = urlParams.get('paymentMethod');
 
         // Fetching multiple product details from URL
-        let productNames = urlParams.getAll('productName');
-        let brandNames = urlParams.getAll('brandName');
-        let totalAmounts = urlParams.getAll('totalAmount');
+        let productNames = urlParams.getAll('productName[]');
+        let brandNames = urlParams.getAll('brandName[]');
+        let totalAmounts = urlParams.getAll('totalAmount[]');
 
         let totalAmount = 0;
 
