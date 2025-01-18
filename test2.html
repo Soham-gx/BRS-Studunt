@@ -59,6 +59,11 @@
             background-color: #4a3aff;
             color: white;
         }
+        @media print {
+            .print-button {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -136,6 +141,10 @@
         </div>
     </div>
 
+    <div class="print-button">
+        <button onclick="window.print()">Print Invoice</button>
+    </div>
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         document.getElementById('customerName').innerText = urlParams.get('customerName');
@@ -147,8 +156,5 @@
         document.getElementById('paymentMethod').innerText = urlParams.get('paymentMethod');
         document.getElementById('paymentModeDisplay').innerText = urlParams.get('paymentMethod');
     </script>
-    <div class="print-button">
-            <button onclick="window.print()">Print Invoice</button>
-        </div>
 </body>
 </html>
