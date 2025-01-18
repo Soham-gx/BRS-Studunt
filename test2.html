@@ -106,47 +106,72 @@
             </table>
         </div>
 
+        <table class="items" id="itemsTable">
+            <tr>
+                <th>S.No</th>
+                <th>Product Name</th>
+                <th>Brand Name</th>
+                <th>QTY</th>
+                <th>MRP</th>
+                <th>Amount</th>
+            </tr>
+        </table>
 
-          <table class="items" id="itemsTable">
-    <tr>
-        <th>S.No</th>
-        <th>Product Name</th>
-        <th>Brand Name</th>
-        <th>QTY</th>
-        <th>MRP</th>
-        <th>Amount</th>
-    </tr>
-</table>
+        <div class="details">
+            <table>
+                <tr>
+                    <td><strong>Total:</strong> <span id="totalAmountDisplay"></span></td>
+                    <td><strong>Payment Mode:</strong> <span id="paymentModeDisplay"></span></td>
+                    <td><strong>Reference No:</strong> #REF1234</td>
+                </tr>
+            </table>
+        </div>
 
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
+        <div class="terms">
+            <strong>Terms and Conditions:</strong>
+            <p>All sales are final. No returns or refunds. Warranty as per manufacturer terms.</p>
+        </div>
+    </div>
 
-    let productNames = urlParams.getAll('productName');
-    let brandNames = urlParams.getAll('brandName');
-    let totalAmounts = urlParams.getAll('totalAmount');
-    let paymentMethods = urlParams.getAll('paymentMethod');
+    <div class="print-button">
+        <button onclick="window.print()">Print Invoice</button>
+    </div>
 
-    for (let i = 0; i < productNames.length; i++) {
-        let row = document.createElement('tr');
-        
-        row.innerHTML = `
-            <td>${i + 1}</td>
-            <td>${productNames[i]}</td>
-            <td>${brandNames[i]}</td>
-            <td>1</td>
-            <td>${totalAmounts[i]}</td>
-            <td>${totalAmounts[i]}</td>
-        `;
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
 
-        document.getElementById('itemsTable').appendChild(row);
-    }
+        // Fetching customer details from URL
+        document.getElementById('customerName').innerText = urlParams.get('customerName');
+        document.getElementById('customerAddress').innerText = urlParams.get('customerAddress');
+        document.getElementById('customerPhone').innerText = urlParams.get('customerPhone');
+        document.getElementById('paymentMethod').innerText = urlParams.get('paymentMethod');
+        document.getElementById('paymentModeDisplay').innerText = urlParams.get('paymentMethod');
 
-    // Fill other fields like customer name, phone, etc.
-    document.getElementById('customerName').innerText = urlParams.get('customerName');
-    document.getElementById('customerAddress').innerText = urlParams.get('customerAddress');
-    document.getElementById('customerPhone').innerText = urlParams.get('customerPhone');
-    document.getElementById('paymentMethod').innerText = urlParams.get('paymentMethod');
-</script>
-        
-    </body>
+        // Fetching multiple product details from URL
+        let productNames = urlParams.getAll('productName');
+        let brandNames = urlParams.getAll('brandName');
+        let totalAmounts = urlParams.getAll('totalAmount');
+
+        let totalAmount = 0;
+
+        // Looping through the products and adding them to the table
+        for (let i = 0; i < productNames.length; i++) {
+            let row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${i + 1}</td>
+                <td>${productNames[i]}</td>
+                <td>${brandNames[i]}</td>
+                <td>1</td>
+                <td>${totalAmounts[i]}</td>
+                <td>${totalAmounts[i]}</td>
+            `;
+            document.getElementById('itemsTable').appendChild(row);
+
+            totalAmount += parseFloat(totalAmounts[i]);  // Adding up the total amount
+        }
+
+        // Setting total amount display
+        document.getElementById('totalAmountDisplay').innerText = totalAmount.toFixed(2);
+    </script>
+</body>
 </html>
