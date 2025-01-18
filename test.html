@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Invoice Details Form</h1>
-    <form action="test2.html" method="get">
+    <form action="test2.html" method="get" id="invoiceForm">
         <h3>Shop Details</h3>
         <label for="shopName">Shop Name:</label>
         <input type="text" id="shopName" name="shopName" value="Heera Telecom" required><br><br>
@@ -32,56 +32,19 @@
         <input type="text" id="customerPhone" name="customerPhone" required><br><br>
 
         <h3>Product Details</h3>
-        <div id="productList">
-            <div class="product">
-                <label for="productName">Product Name:</label>
-                <input type="text" class="productName" name="productName[]" required><br><br>
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="productName[]" required><br><br>
 
-                <label for="brandName">Brand Name:</label>
-                <input type="text" class="brandName" name="brandName[]" required><br><br>
+        <label for="brandName">Brand Name:</label>
+        <input type="text" id="brandName" name="brandName[]" required><br><br>
 
-                <label for="totalAmount">Total Amount:</label>
-                <input type="text" class="totalAmount" name="totalAmount[]" required><br><br>
+        <label for="totalAmount">Total Amount:</label>
+        <input type="text" id="totalAmount" name="totalAmount[]" required><br><br>
 
-                <label for="paymentMethod">Payment Method:</label>
-                <input type="text" class="paymentMethod" name="paymentMethod[]" required><br><br>
-
-                <button type="button" class="removeProduct">Remove Product</button><br><br>
-            </div>
-        </div>
-        <button type="button" id="addProduct">Add Product</button><br><br>
+        <label for="paymentMethod">Payment Method:</label>
+        <input type="text" id="paymentMethod" name="paymentMethod" required><br><br>
 
         <button type="submit">Generate Invoice</button>
     </form>
-
-    <script>
-        document.getElementById('addProduct').addEventListener('click', function() {
-            var productDiv = document.createElement('div');
-            productDiv.classList.add('product');
-            
-            productDiv.innerHTML = `
-                <label for="productName">Product Name:</label>
-                <input type="text" class="productName" name="productName[]" required><br><br>
-
-                <label for="brandName">Brand Name:</label>
-                <input type="text" class="brandName" name="brandName[]" required><br><br>
-
-                <label for="totalAmount">Total Amount:</label>
-                <input type="text" class="totalAmount" name="totalAmount[]" required><br><br>
-
-                <label for="paymentMethod">Payment Method:</label>
-                <input type="text" class="paymentMethod" name="paymentMethod[]" required><br><br>
-
-                <button type="button" class="removeProduct">Remove Product</button><br><br>
-            `;
-
-            document.getElementById('productList').appendChild(productDiv);
-
-            // Add remove functionality
-            productDiv.querySelector('.removeProduct').addEventListener('click', function() {
-                productDiv.remove();
-            });
-        });
-    </script>
 </body>
 </html>
