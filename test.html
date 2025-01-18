@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice Generator</title>
-    <script src="test.js" </script>
 </head>
 <body>
     <h1>Invoice Generator</h1>
@@ -35,5 +34,14 @@
 
         <button type="button" onclick="generateInvoice()">Submit</button>
     </form>
+
+    <script>
+        function generateInvoice() {
+            const form = document.getElementById('invoiceForm');
+            const formData = new FormData(form);
+            const params = new URLSearchParams(formData).toString();
+            window.location.href = `invoice.html?${params}`;
+        }
+    </script>
 </body>
 </html>
