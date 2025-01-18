@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        /* Add your CSS here for professional styling */
+    </style>
+</head>
+<body>
+    <h1>Invoice</h1>
+    <div id="invoiceDetails">
+        <!-- Invoice details will be populated here -->
+    </div>
+    <button onclick="window.print()">Print Invoice</button>
+
+    <script>
+        // Retrieve and display invoice data
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const customerName = urlParams.get('customerName');
+            const address = urlParams.get('address');
+            const city = urlParams.get('city');
+            const invNumber = urlParams.get('invNumber');
+            const invDate = urlParams.get('invDate');
+            const item = urlParams.get('item');
+            const quantity = urlParams.get('quantity');
+            const rate = urlParams.get('rate');
+
+            document.getElementById('invoiceDetails').innerHTML = `
+                <p><strong>Customer Name:</strong> ${customerName}</p>
+                <p><strong>Address:</strong> ${address}</p>
+                <p><strong>City:</strong> ${city}</p>
+                <p><strong>Invoice Number:</strong> ${invNumber}</p>
+                <p><strong>Invoice Date:</strong> ${invDate}</p>
+                <p><strong>Item:</strong> ${item}</p>
+                <p><strong>Quantity:</strong> ${quantity}</p>
+                <p><strong>Rate:</strong> ${rate}</p>
+                <p><strong>Total Amount:</strong> ${quantity * rate}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
