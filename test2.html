@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice</title>
+    <title>Heera Telecom Invoice</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
         }
 
         h1 {
@@ -15,71 +25,130 @@
             color: #333;
         }
 
-        #invoiceDetails {
-            max-width: 800px;
-            margin: 0 auto;
-            border: 1px solid #ddd;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-        }
-
-        #invoiceDetails p {
-            margin: 10px 0;
-            font-size: 18px;
-        }
-
-        strong {
-            color: #555;
-        }
-
-        button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
+        p, table {
             font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        .header, .footer {
+            background-color: #4a90e2;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .terms {
+            margin-top: 20px;
+        }
+
+        .print-button {
+            display: none;
+        }
+
+        @media print {
+            .print-button {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Invoice</h1>
-    <div id="invoiceDetails">
-        <!-- Invoice details will be populated here -->
+    <div class="invoice-container">
+        <div class="header">
+            <h1>Heera Telecom</h1>
+        </div>
+        <div id="invoiceDetails">
+            <!-- Invoice details will be populated here -->
+        </div>
+        <button class="print-button" onclick="window.print()">Print Invoice</button>
+        <div class="footer">
+            <p>Thank you for your business!</p>
+        </div>
     </div>
-    <button onclick="window.print()">Print Invoice</button>
 
     <script>
         // Retrieve and display invoice data
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const customerName = urlParams.get('customerName');
-            const address = urlParams.get('address');
-            const city = urlParams.get('city');
-            const invNumber = urlParams.get('invNumber');
-            const invDate = urlParams.get('invDate');
-            const item = urlParams.get('item');
-            const quantity = urlParams.get('quantity');
-            const rate = urlParams.get('rate');
+            const data = {
+                shopName: "Heera Telecom",
+                gst: "1234567890",
+                address: "123 Street, City, State",
+                phone: "+91-1234567890",
+                customerName: urlParams.get('customerName'),
+                customerAddress: urlParams.get('customerAddress'),
+                customerPhone: urlParams.get('customerPhone'),
+                orderNumber: urlParams.get('orderNumber'),
+                paymentMethod: urlParams.get('paymentMethod'),
+                warrantyDate: urlParams.get('warrantyDate'),
+                goodsDescription: urlParams.get('goodsDescription'),
+                hsn: urlParams.get('hsn'),
+                quantity: urlParams.get('quantity'),
+                mrp: urlParams.get('mrp'),
+                totalAmount: urlParams.get('totalAmount'),
+                paymentMode: urlParams.get('paymentMode')
+            };
 
             document.getElementById('invoiceDetails').innerHTML = `
-                <p><strong>Customer Name:</strong> ${customerName}</p>
-                <p><strong>Address:</strong> ${address}</p>
-                <p><strong>City:</strong> ${city}</p>
-                <p><strong>Invoice Number:</strong> ${invNumber}</p>
-                <p><strong>Invoice Date:</strong> ${invDate}</p>
-                <p><strong>Item:</strong> ${item}</p>
-                <p><strong>Quantity:</strong> ${quantity}</p>
-                <p><strong>Rate:</strong> ${rate}</p>
-                <p><strong>Total Amount:</strong> ${quantity * rate}</p>
+                <p><strong>Shop Name:</strong> ${data.shopName}</p>
+                <p><strong>GSTIN No:</strong> ${data.gst}</p>
+                <p><strong>Address:</strong> ${data.address}</p>
+                <p><strong>Phone Number:</strong> ${data.phone}</p>
+                <h3>Bill To:</h3>
+                <p><strong>Name:</strong> ${data.customerName}</p>
+                <p><strong>Address:</strong> ${data.customerAddress}</p>
+                <p><strong>Phone No:</strong> ${data.customerPhone}</p>
+                <h3>Order Details:</h3>
+                <p><strong>Order Number:</strong> ${data.orderNumber}</p>
+                <p><strong>Method of Payment:</strong> ${data.paymentMethod}</p>
+                <p><strong>Warranty Till Date:</strong> ${data.warrantyDate}</p>
+                <h3>Product Details:</h3>
+                <table>
+                    <tr>
+                        <th>Goods Description</th>
+                        <th>HSN</th>
+                        <th>QTY</th>
+                        <th>MRP</th>
+                        <th>Amount</th>
+                    </tr>
+                    <tr>
+                        <td>${data.goodsDescription}</td>
+                        <td>${data.hsn}</td>
+                        <td>${data.quantity}</td>
+                        <td>${data.mrp}</td>
+                        <td>${data.totalAmount}</td>
+                    </tr>
+                </table>
+                <h3>Total Amount:</h3>
+                <p><strong>${data.totalAmount}</strong></p>
+                <h3>Payment Mode:</h3>
+                <p><strong>${data.paymentMode}</strong></p>
+                <div class="terms">
+                    <h3>Terms and Conditions:</h3>
+                    <p>All sales are final. Please check your products before leaving the store.</p>
+                </div>
             `;
         }
     </script>
