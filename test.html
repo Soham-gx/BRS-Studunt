@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Form</title>
+</head>
+<body>
+    <h1>Invoice Details Form</h1>
+    <form action="invoice.html" method="get">
+        <h3>Shop Details</h3>
+        <label for="shopName">Shop Name:</label>
+        <input type="text" id="shopName" name="shopName" value="Heera Telecom" required><br><br>
+
+        <label for="gstin">GSTIN No:</label>
+        <input type="text" id="gstin" name="gstin" required><br><br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required><br><br>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" required><br><br>
+
+        <h3>Customer Details</h3>
+        <label for="customerName">Customer Name:</label>
+        <input type="text" id="customerName" name="customerName" required><br><br>
+
+        <label for="customerAddress">Customer Address:</label>
+        <input type="text" id="customerAddress" name="customerAddress" required><br><br>
+
+        <label for="customerPhone">Customer Phone:</label>
+        <input type="text" id="customerPhone" name="customerPhone" required><br><br>
+
+        <h3>Product Details</h3>
+        <label for="itemDescription">Item Description:</label>
+        <input type="text" id="itemDescription" name="itemDescription" required><br><br>
+
+        <label for="totalAmount">Total Amount:</label>
+        <input type="text" id="totalAmount" name="totalAmount" required><br><br>
+
+        <label for="paymentMethod">Payment Method:</label>
+        <input type="text" id="paymentMethod" name="paymentMethod" required><br><br>
+
+        <button type="submit">Generate Invoice</button>
+    </form>
+       <script>
+    
+    function submitForm() {
+            const data = {
+                customerName: document.getElementById('customerName').value,
+                address: document.getElementById('address').value,
+                phoneNumber: document.getElementById('phoneNumber').value,
+                invoiceNumber: document.getElementById('invoiceNumber').value,
+                invoiceDate: document.getElementById('invoiceDate').value,
+            };
+            localStorage.setItem('invoiceData', JSON.stringify(data));
+            window.location.href = 'test2.html';
+
+    
+       </script>
+</body>
+</html>
