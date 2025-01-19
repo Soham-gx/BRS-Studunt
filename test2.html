@@ -76,15 +76,14 @@
             <table>
                 <tr>
                     <td><strong>Shop Name:</strong> Heera Telecom</td>
-                    <td><strong>GSTIN No:</strong>23AXWPM1507B1ZQ</td>
+                    <td><strong>GSTIN No:</strong> 23AXWPM1507B1ZQ</td>
                 </tr>
                 <tr>
-                    <td><strong>Address:</strong> No.1, HEERA TELECOM, Ekta Tower, Rewa Rd, opposite CMA School,Satna, Madhya
-Pradesh 485001</td>
-                    <td><strong>Invoice No:</strong> #00123</td>
+                    <td><strong>Address:</strong> No.1, HEERA TELECOM, Ekta Tower, Rewa Rd, opposite CMA School, Satna, Madhya Pradesh 485001</td>
+                    <td><strong>Invoice No:</strong> <span id="invoiceNumber"></span></td>
                 </tr>
                 <tr>
-                    <td><strong>Phone Number:</strong>7000577501,9098985353</td>
+                    <td><strong>Phone Number:</strong> 7000577501, 9098985353</td>
                 </tr>
             </table>
         </div>
@@ -102,7 +101,11 @@ Pradesh 485001</td>
                 </tr>
                 <tr>
                     <td><strong>Phone No:</strong> <span id="customerPhone"></span></td>
-                    <td><strong>Warranty Till Date:</strong> 12/12/2025</td>
+                    <td><strong>Warranty Till Date:</strong> <span id="warrantyDate"></span></td>
+                </tr>
+                <tr>
+                    <td><strong>Staff Name:</strong> <span id="staffName"></span></td>
+                    <td><strong>Reference No:</strong> #REF1234</td>
                 </tr>
             </table>
         </div>
@@ -141,37 +144,37 @@ Pradesh 485001</td>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
 
-        // Fetching customer details from URL
         document.getElementById('customerName').innerText = urlParams.get('customerName');
         document.getElementById('customerAddress').innerText = urlParams.get('customerAddress');
         document.getElementById('customerPhone').innerText = urlParams.get('customerPhone');
         document.getElementById('paymentMethod').innerText = urlParams.get('paymentMethod');
         document.getElementById('paymentModeDisplay').innerText = urlParams.get('paymentMethod');
+        document.getElementById('invoiceNumber').innerText = urlParams.get('invoiceNumber');
+        document.getElementById('staffName').innerText = urlParams.get('staffName');
+        document.getElementById('warrantyDate').innerText = urlParams.get('warrantyDate');
 
-        // Fetching multiple product details from URL
         let productNames = urlParams.getAll('productName[]');
         let brandNames = urlParams.getAll('brandName[]');
         let totalAmounts = urlParams.getAll('totalAmount[]');
+        let quantities = urlParams.getAll('quantity[]');
 
         let totalAmount = 0;
 
-        // Looping through the products and adding them to the table
         for (let i = 0; i < productNames.length; i++) {
             let row = document.createElement('tr');
             row.innerHTML = `
                 <td>${i + 1}</td>
                 <td>${productNames[i]}</td>
                 <td>${brandNames[i]}</td>
-                <td>1</td>
+                <td>${quantities[i]}</td>
                 <td>${totalAmounts[i]}</td>
                 <td>${totalAmounts[i]}</td>
             `;
             document.getElementById('itemsTable').appendChild(row);
 
-            totalAmount += parseFloat(totalAmounts[i]);  // Adding up the total amount
+            totalAmount += parseFloat(totalAmounts[i]);
         }
 
-        // Setting total amount 
         document.getElementById('totalAmountDisplay').innerText = totalAmount.toFixed(2);
     </script>
 </body>
