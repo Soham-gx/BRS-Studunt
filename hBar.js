@@ -19,7 +19,7 @@ function displayProducts() {
     const products = [
         { id: 1, name: 'Product 1', price: 100, image: 'product1.jpg', quantity: 10, colors: ['White', 'Black', 'Red'] },
         { id: 2, name: 'Product 2', price: 200, image: 'product2.jpg', quantity: 5, colors: ['White', 'Blue', 'Green'] },
-        { id: 3, name: 'Product 3', price: 300, image: 'product3.jpg', quantity: 8, colors: ['White', 'Yellow', 'Pink'] },
+        { id: 3, name: 'Product 3', price: 300, image: 'IMG_1868.png', quantity: 8, colors: ['White', 'Yellow', 'Pink'] },
     ];
     const productList = document.getElementById('product-list');
     productList.innerHTML = '';
