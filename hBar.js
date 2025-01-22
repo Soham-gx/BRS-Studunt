@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const username = localStorage.getItem('username');
-    document.getElementById('username-display').innerText = Welcom To Heera Telecom;
+    document.getElementById('username-display').innerText = `Welcome, ${username}`;
     document.getElementById('account-username').innerText = username;
 
     displayProducts();
