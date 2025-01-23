@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heera Telecom - Admin Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="admin-login-container" id="login-container">
+    <h1>Admin Login</h1>
+    <form id="admin-login-form">
+      <label for="admin-username">Username:</label>
+      <input type="text" id="admin-username" required>
+      <label for="admin-password">Password:</label>
+      <input type="password" id="admin-password" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <div class="admin-container" id="dashboard-container" style="display: none;">
+    <h1>Heera Telecom - Admin Dashboard</h1>
+    <button id="logout">Logout</button>
+    <div id="order-details"></div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
