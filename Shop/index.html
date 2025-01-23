@@ -1,26 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Heera Telecom - Home</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heera Telecom</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            padding: 20px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .navbar .brand {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar .menu a {
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .navbar .cart {
+            position: relative;
+        }
+
+        .navbar .cart span {
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 10px;
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 12px;
+        }
+
+        /* Product Section */
+        .product {
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .product h3 {
+            margin-bottom: 10px;
+        }
+
+        .product select,
+        .product button {
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .product .variants,
+        .product .colors {
+            margin: 10px 0;
+        }
+
+        .product button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Welcome to Heera Telecom</h1>
-    <nav>
-      <a href="cart.html">Cart</a>
-      <a href="login.html">Login/Signup</a>
-      <a href="feedback.html">Feedback</a>
-    </nav>
-  </header>
-  <main>
-    <div class="search-bar">
-      <input type="text" id="search" placeholder="Search for products..." oninput="filterProducts()">
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="brand">Heera Telecom</div>
+        <div class="menu">
+            <a href="#">Login & Signup</a>
+            <a href="#">Admin</a>
+            <a href="#">More</a>
+        </div>
+        <div class="cart">
+            <a href="#">Cart</a>
+            <span id="cart-count">0</span>
+        </div>
     </div>
-    <div id="product-list" class="product-container"></div>
-  </main>
-  <script src="script.js"></script>
+
+    <!-- Product Section -->
+    <div id="product-container">
+        <!-- Product 1 -->
+        <div class="product">
+            <img src="https://via.placeholder.com/300x200?text=Product+1" alt="Product 1 Image">
+            <h3>Product 1</h3>
+            <p>Price: ₹<span class="price">10,000</span></p>
+
+            <!-- Variant Options -->
+            <div class="variants">
+                <label for="variant1">Choose Variant:</label>
+                <select class="variant">
+                    <option value="128/4GB">128/4GB</option>
+                    <option value="256/8GB">256/8GB</option>
+                </select>
+            </div>
+
+            <!-- Color Options -->
+            <div class="colors">
+                <label for="color1">Choose Color:</label>
+                <select class="color">
+                    <option value="Black">Black</option>
+                    <option value="Blue">Blue</option>
+                    <option value="White">White</option>
+                </select>
+            </div>
+
+            <!-- Add to Cart Button -->
+            <button onclick="addToCart(this)">Add to Cart</button>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product">
+            <img src="https://via.placeholder.com/300x200?text=Product+2" alt="Product 2 Image">
+            <h3>Product 2</h3>
+            <p>Price: ₹<span class="price">20,000</span></p>
+
+            <!-- Variant Options -->
+            <div class="variants">
+                <label for="variant2">Choose Variant:</label>
+                <select class="variant">
+                    <option value="64/4GB">64/4GB</option>
+                    <option value="128/6GB">128/6GB</option>
+                </select>
+            </div>
+
+            <!-- Color Options -->
+            <div class="colors">
+                <label for="color2">Choose Color:</label>
+                <select class="color">
+                    <option value="Black">Black</option>
+                    <option value="Red">Red</option>
+                    <option value="Gold">Gold</option>
+                </select>
+            </div>
+
+            <!-- Add to Cart Button -->
+            <button onclick="addToCart(this)">Add to Cart</button>
+        </div>
+    </div>
+
+    <script>
+        let cartCount = 0;
+
+        // Function to handle Add to Cart
+        function addToCart(button) {
+            const product = button.parentElement;
+            const variant = product.querySelector('.variant').value;
+            const color = product.querySelector('.color').value;
+            const price = product.querySelector('.price').innerText;
+
+            // Increment cart count
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+
+            // Log the product details (replace this with backend handling if needed)
+            console.log(`Added to cart: Variant=${variant}, Color=${color}, Price=₹${price}`);
+        }
+    </script>
+
 </body>
 </html>
