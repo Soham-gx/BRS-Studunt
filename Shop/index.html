@@ -3,20 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Heera Telecom - Login/Signup</title>
+  <title>Heera Telecom - Home</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="login-container">
+  <header>
     <h1>Welcome to Heera Telecom</h1>
-    <h2>Login / Signup</h2>
-    <form id="login-form">
-      <label for="username">Username:</label>
-      <input type="text" id="username" required>
-      <label for="password">Password:</label>
-      <input type="password" id="password" required>
-      <button type="submit">Login</button>
-    </form>
-  </div>
+    <nav>
+      <a href="cart.html">Cart</a>
+      <a href="login.html">Login/Signup</a>
+      <a href="feedback.html">Feedback</a>
+    </nav>
+  </header>
+  <main>
+    <div class="search-bar">
+      <input type="text" id="search" placeholder="Search for products..." oninput="filterProducts()">
+    </div>
+    <div id="product-list" class="product-container"></div>
+  </main>
+  <script src="script.js"></script>
 </body>
 </html>
