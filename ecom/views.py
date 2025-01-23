@@ -512,4 +512,30 @@ def edit_profile_view(request):
     if request.method=='POST':
         userForm=forms.CustomerUserForm(request.POST,instance=user)
         customerForm=forms.CustomerForm(request.POST,instance=customer)
-        if userFor
+        if userFor.is_valid() and customerForm.is_valid():
+            user=userForm.save()
+            user.set_password(user.password)
+            user.save()
+            customerForm.save()
+            return HttpResponseRedirect('my-profile')
+    return render(request,'ecom/edit_profile.html',context=mydict)
+
+
+
+#---------------------------------------------------------------------------------
+#------------------------ ABOUT US AND CONTACT US VIEWS START --------------------
+#---------------------------------------------------------------------------------
+def aboutus_view(request):
+    return render(request,'ecom/aboutus.html')
+
+def contactus_view(request):
+    sub = forms.ContactusForm()
+    if request.method == 'POST':
+        sub = forms.ContactusForm(request.POST)
+        if sub.is_valid():
+            email = sub.cleaned_data['Email']
+            name=sub.cleaned_data['Name']
+            message = sub.cleaned_data['Message']
+            send_mail(str(name)+' || '+str(email),message, settings.EMAIL_HOST_USER, settings.EMAIL_RECEIVING_USER, fail_silently = False)
+            return render(request, 'ecom/contactussuccess.html')
+    return render(request, 'ecom/contactus.html', {'form':sub})
