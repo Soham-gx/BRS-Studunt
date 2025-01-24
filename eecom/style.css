@@ -1,101 +1,13 @@
 body {
-    margin: 0;
-    font-family: Poppins, sans-serif;
+  font-family: Arial, sans-serif;
 }
-.container {
-    width: 900px;
-    margin: auto;
-    max-width: 90vw;
-    text-align: center;
-    padding-top: 10px;
-    transition: transform .5s;
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
 }
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-}
-.icon-cart {
-    position: relative;
-}
-.icon-cart span {
-    position: absolute;
-    background-color: red;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    color: #fff;
-    top: -5px;
-    right: -20px;
-}
-.listProduct {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-.listProduct .item {
-    background-color: #eeeee6;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-}
-.listProduct .item img {
-    width: 100%;
-    height: auto;
-}
-.listProduct .item h2 {
-    font-size: 18px;
-    margin: 10px 0;
-}
-.listProduct .item .price {
-    font-size: 16px;
-    margin: 5px 0;
-}
-.listProduct .item button {
-    background-color: #353432;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.cartTab {
-    width: 400px;
-    background-color: #353432;
-    color: #fff;
-    position: fixed;
-    top: 0;
-    right: -400px;
-    bottom: 0;
-    display: grid;
-    grid-template-rows: 70px 1fr 70px;
-    transition: .5s;
-}
-body.showCart .cartTab {
-    right: 0;
-}
-.cartTab h1 {
-    padding: 20px;
-    margin: 0;
-}
-.listCart {
-    overflow: auto;
-    padding: 10px;
-}
-.listCart .item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-}
-.cartTab button {
-    background-color: #e8bc0e;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
+
+.nav-tabs .nav-link.active {
+  background-color: #343a40;
+  color: #fff;
 }
