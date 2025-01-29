@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* बॉक्स को सही तरीके से दिखाने के लिए CSS */
+        .cell {
+            width: 80px; /* फिक्स्ड साइज़ */
+            height: 80px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            background-color: white;
+            color: black;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .cell:hover {
+            transform: scale(1.1);
+            background-color: #ddd;
+        }
+        #gameBoard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+
+    <!-- गेम टाइटल -->
+    <h1 class="text-4xl font-bold mb-6 animate-bounce">Tic Tac Toe</h1>
+
+    <!-- स्टार्ट गेम बटन -->
+    <button id="startGame" class="px-6 py-3 mb-6 bg-green-500 hover:bg-green-600 text-xl font-semibold rounded-lg shadow-lg transition-transform transform hover:scale-105">
+        Play Game
+    </button>
+
+    <!-- गेम बोर्ड -->
+    <div id="gameBoard" class="hidden">
+        <!-- 9 सेल्स -->
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+    </div>
+
+    <!-- विनर पॉपअप -->
+    <div id="winnerPopup" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div class="bg-white text-black p-6 rounded-lg text-center shadow-xl">
+            <h2 id="winnerText" class="text-2xl font-bold mb-4"></h2>
+            <button id="restartGame" class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Restart</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const startGameBtn = document.getElementById("startGame");
+            const gameBoard = document.getElementById("gameBoard");
+            const cells = document.querySelectorAll(".cell");
+            const winnerPopup = document.getElementById("winnerPopup");
+            const winnerText = document.getElementById("winnerText");
+            const restartGameBtn = document.getElementById("restartGame");
+
+            let currentPlayer = "X";
+            let boardState = ["", "", "", "", "", "", "", "", ""];
+            let gameActive = true;
+
+            // जीतने के पैटर्न
+            const winPatterns = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], 
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+                [0, 4, 8], [2, 4, 6]
+            ];
+
+            // स्टार्ट बटन पर क्लिक करते ही गेम स्टार्ट
+            startGameBtn.addEventListener("click", () => {
+                startGameBtn.classList.add("hidden");
+                gameBoard.classList.remove("hidden");
+            });
+
+            // बॉक्स पर क्लिक करने का इवेंट
+            cells.forEach((cell, index) => {
+                cell.addEventListener("click", () => {
+                    if (boardState[index] === "" && gameActive) {
+                        boardState[index] = currentPlayer;
+                        cell.innerText = currentPlayer;
+
+                        if (checkWin(currentPlayer)) {
+                            gameActive = false;
+                            showWinner(currentPlayer);
+                        } else if (boardState.every(cell => cell !== "")) {
+                            showWinner("Draw");
+                        } else {
+                            currentPlayer = currentPlayer === "X" ? "O" : "X";
+                        }
+                    }
+                });
+            });
+
+            // जीतने की शर्तें चेक करें
+            function checkWin(player) {
+                return winPatterns.some(pattern => {
+                    return pattern.every(index => boardState[index] === player);
+                });
+            }
+
+            // विनर दिखाने का फंक्शन
+            function showWinner(winner) {
+                winnerText.innerText = winner === "Draw" ? "It's a Tie!" : `Winner: ${winner}`;
+                winnerPopup.classList.remove("hidden");
+            }
+
+            // रीस्टार्ट गेम
+            restartGameBtn.addEventListener("click", () => {
+                boardState = ["", "", "", "", "", "", "", "", ""];
+                gameActive = true;
+                currentPlayer = "X";
+                cells.forEach(cell => cell.innerText = "");
+                winnerPopup.classList.add("hidden");
+            });
+        });
+    </script>
+</body>
+</html>
