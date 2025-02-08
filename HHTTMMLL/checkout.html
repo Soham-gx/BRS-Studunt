@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Online Art Shop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="checkout-form">
+    <button class="close-btn" onclick="cancelCheckout()">❌</button>
+    <h2>Checkout</h2>
+    <form id="checkout-form">
+        <input type="text" id="name" placeholder="Enter Your Name" required>
+        <input type="text" id="phone" placeholder="Enter Phone Number" required>
+        <input type="text" id="address" placeholder="Enter Address" required>
+        <button type="submit">Place Order</button>
+    </form>
+</div>
+
+<script>
+function cancelCheckout() {
+    window.location.href = "cart.html";
+}
+
+document.getElementById("checkout-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let formData = new FormData();
+    formData.append("name", document.getElementById("name").value);
+    formData.append("phone", document.getElementById("phone").value);
+    formData.append("address", document.getElementById("address").value);
+
+    fetch("order.php", { method: "POST", body: formData })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            localStorage.removeItem("cart");
+            window.location.href = "index.html";
+        });
+});
+</script>
+
+</body>
+</html>

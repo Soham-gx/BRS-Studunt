@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Orders</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Admin Panel - Orders</h1>
+<button onclick="fetchOrders()">Refresh Orders</button>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Product</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="orders-table">
+        <tr><td colspan="5">No Orders Yet</td></tr>
+    </tbody>
+</table>
+
+<script>
+function fetchOrders() {
+    fetch("admin.php")
+        .then(response => response.json())
+        .then(data => {
+            let ordersTable = document.getElementById("orders-table");
+            ordersTable.innerHTML = "";
+
+            if (data.length === 0) {
+                ordersTable.innerHTML = "<tr><td colspan='5'>No Orders Yet</td></tr>";
+                return;
+            }
+
+            data.forEach((order, index) => {
+                let row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${order.name}</td>
+                    <td>${order.phone}</td>
+                    <td>${order.address}</td>
+                    <td>${order.product}</td>
+                    <td><button onclick="deleteOrder(${index})">❌ Delete</button></td>
+                `;
+                ordersTable.appendChild(row);
+            });
+        })
+        .catch(error => console.error("Error fetching orders:", error));
+}
+
+function deleteOrder(index) {
+    fetch("delete_order.php?index=" + index)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                fetchOrders();
+            } else {
+                alert("Error deleting order");
+            }
+        });
+}
+
+fetchOrders();
+</script>
+
+</body>
+</html>
