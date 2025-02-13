@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Orders</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Panel - Manage Orders</h1>
+
+        <input type="text" id="orderId" placeholder="Order No.">
+        <input type="text" id="customerName" placeholder="Customer Name">
+        <input type="text" id="phoneNumber" placeholder="Phone Number">
+        <input type="text" id="productName" placeholder="Product Name">
+        <input type="text" id="paymentMethod" placeholder="Payment Method">
+        <input type="text" id="address" placeholder="Address">
+        <input type="text" id="deliveryStatus" placeholder="Delivery Status">
+        <input type="text" id="paymentReceived" placeholder="Payment Received (Yes/No)">
+        <button onclick="addOrder()">Add/Update Order</button>
+
+        <h2>Orders List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order No.</th>
+                    <th>Customer</th>
+                    <th>Product</th>
+                    <th>Delivery Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="ordersTable"></tbody>
+        </table>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 8px auto;
+      max-width: 400px;
+      border-radius: 5px;
+    }
+    .remove-btn {
+      background: none;
+      border: none;
+      color: red;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    #total-price {
+      font-weight: bold;
+      margin: 15px 0;
+    }
+    button.checkout-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button.checkout-btn:hover {
+      background: #555;
+    }
+
+    /* Checkout Form (Modal) */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 40%;
+      text-align: left;
+    }
+    .close {
+      float: right;
+      font-size: 20px;
+      cursor: pointer;
+      color: red;
+    }
+    .close:hover {
+      color: darkred;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .checkbox-container input {
+      margin-right: 10px;
+    }
+    .place-order-btn {
+      background: green;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .place-order-btn:disabled {
+      background: gray;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <h2>Your Cart</h2>
+  <div id="cart-items"></div>
+  <div id="total-price"></div>
+  <button class="checkout-btn" onclick="openCheckoutForm()">Proceed to Checkout</button>
+
+  <!-- Checkout Form Modal -->
+  <div id="checkout-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCheckoutForm()">❌</span>
+      <h3>Checkout Form</h3>
+      <form action="https://formsubmit.co/help.heeratelecom9@gmail.com" method="POST">
+        <label>Full Name</label>
+        <input type="text" name="fullname" required>
+        <label>Phone Number</label>
+        <input type="tel" name="phone" required>
+        <label>Address</label>
+        <textarea name="address" required></textarea>
+        <label>Product Details</label>
+        <textarea id="product-details" name="products" readonly></textarea>
+
+        <!-- Checkbox to Enable Place Order -->
+        <div class="checkbox-container">
+          <input type="checkbox" id="terms-checkbox" onchange="togglePlaceOrderButton()">
+          <label for="terms-checkbox">I agree to receive my order details within 24 hours.</label>
+        </div>
+
+        <button type="submit" class="place-order-btn" id="place-order-btn" disabled>Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let currentUser = localStorage.getItem("currentUser") || "defaultUser";
+    let cartKey = currentUser + "_cart";
+
+    function loadCart() {
+      let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+      const cartDiv = document.getElementById("cart-items");
+      let totalPrice = 0;
+      cartDiv.innerHTML = "";
+
+      if (cart.length === 0) {
+        cartDiv.innerHTML = "<p>Your cart is empty.</p>";
+      } else {
+        cart.forEach((item, index) => {
+          totalPrice += Number(item.price);
+          const itemDiv = document.createElement("div");
+          itemDiv.className = "cart-item";
+          itemDiv.innerHTML = `
+            <span>${item.name} - ₹${item.price}</span>
+            <button class="remove-btn" onclick="removeItem(${index})">❌</button>
+          `;
+          cartDiv.appendChild(itemDiv);
+        });
+      }
+      document.getElementById("total-price").innerText = "Total: ₹" + totalPrice;
+    }
+
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+      cart.splice(index, 1);
+      localStorage.setItem(cartKey, JSON.stringify(cart));
+      loadCart();
+    }
+
+    function openCheckoutForm() {
+      let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+
+      let productDetails = cart.map(item => `${item.name} - ₹${item.price}`).join("\n");
+      document.getElementById("product-details").value = productDetails;
+
+      document.getElementById("checkout-modal").style.display = "block";
+    }
+
+    function closeCheckoutForm() {
+      document.getElementById("checkout-modal").style.display = "none";
+    }
+
+    function togglePlaceOrderButton() {
+      document.getElementById("place-order-btn").disabled = !document.getElementById("terms-checkbox").checked;
+    }
+
+    loadCart();
+  </script>
+</body>
+</html>

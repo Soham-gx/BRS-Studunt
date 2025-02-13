@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+</head>
+<body>
+
+    <h2>Admin Panel - Manage Products</h2>
+
+    <input type="text" id="product-name" placeholder="Product Name">
+    <input type="number" id="product-price" placeholder="Price">
+    <input type="text" id="product-image" placeholder="Image URL">
+    <button onclick="addProduct()">Add Product</button>
+
+    <h3>Product List</h3>
+    <div id="product-list"></div>
+
+    <script>
+        function loadProducts() {
+            let products = JSON.parse(localStorage.getItem("products")) || [];
+            let productList = document.getElementById("product-list");
+            productList.innerHTML = "";
+
+            products.forEach((product, index) => {
+                productList.innerHTML += `
+                    <p>
+                        ${product.name} - ₹${product.price} 
+                        <button onclick="editProduct(${index})">✏️ Edit</button>
+                        <button onclick="deleteProduct(${index})">🗑️ Delete</button>
+                    </p>
+                `;
+            });
+        }
+
+        function addProduct() {
+            let name = document.getElementById("product-name").value;
+            let price = document.getElementById("product-price").value;
+            let image = document.getElementById("product-image").value;
+
+            if (!name || !price || !image) {
+                alert("Please fill all fields");
+                return;
+            }
+
+            let products = JSON.parse(localStorage.getItem("products")) || [];
+            products.push({ name, price, image });
+            localStorage.setItem("products", JSON.stringify(products));
+            
+            alert("Product Added!");
+            loadProducts();
+        }
+
+        function editProduct(index) {
+            let products = JSON.parse(localStorage.getItem("products")) || [];
+            let newName = prompt("Enter new product name:", products[index].name);
+            let newPrice = prompt("Enter new price:", products[index].price);
+            let newImage = prompt("Enter new image URL:", products[index].image);
+
+            if (newName && newPrice && newImage) {
+                products[index] = { name: newName, price: newPrice, image: newImage };
+                localStorage.setItem("products", JSON.stringify(products));
+                loadProducts();
+            }
+        }
+
+        function deleteProduct(index) {
+            let products = JSON.parse(localStorage.getItem("products")) || [];
+            products.splice(index, 1);
+            localStorage.setItem("products", JSON.stringify(products));
+            loadProducts();
+        }
+
+        loadProducts();
+    </script>
+
+</body>
+</html>
