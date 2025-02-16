@@ -1,141 +1,69 @@
-// User Registration
-function register() {
-  let username = document.getElementById("username").value.trim();
-  let password = document.getElementById("password").value;
-  let users = JSON.parse(localStorage.getItem("users")) || {};
+// Load Products Function
+function loadProducts() {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let productList = document.getElementById("product-list");
+    productList.innerHTML = "";
 
-  if (!username || !password) {
-    document.getElementById("error-message").innerText = "Username and password cannot be empty!";
-    return;
-  }
-
-  if (users[username]) {
-    document.getElementById("error-message").innerText = "This username is already taken!";
-    return;
-  }
-
-  users[username] = password;
-  localStorage.setItem("users", JSON.stringify(users));
-  localStorage.setItem("currentUser", username);
-  moveGuestCartToUser(username);
-  window.location.href = "home.html";
-}
-
-// User Login
-function login() {
-  let username = document.getElementById("username").value.trim();
-  let password = document.getElementById("password").value;
-  let users = JSON.parse(localStorage.getItem("users")) || {};
-
-  if (users[username] && users[username] === password) {
-    localStorage.setItem("currentUser", username);
-    moveGuestCartToUser(username);
-    window.location.href = "home.html";
-  } else {
-    document.getElementById("error-message").innerText = "Invalid username or password!";
-  }
-}
-
-// Logout
-function logout() {
-  localStorage.removeItem("currentUser");
-  window.location.href = "index.html";
-}
-
-// Move Guest Cart to User Cart After Login
-function moveGuestCartToUser(username) {
-  let guestCart = JSON.parse(localStorage.getItem("guest_cart")) || [];
-  let userCart = JSON.parse(localStorage.getItem(username + "_cart")) || [];
-
-  if (guestCart.length > 0) {
-    userCart.push(...guestCart);
-    localStorage.setItem(username + "_cart", JSON.stringify(userCart));
-    localStorage.removeItem("guest_cart");
-  }
-}
-
-// Add to Cart (Supports both guest and logged-in users)
-function addToCart(productName, price) {
-  let currentUser = localStorage.getItem("currentUser");
-  let cartKey = currentUser ? currentUser + "_cart" : "guest_cart";
-
-  let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-  cart.push({ name: productName, price: price });
-
-  localStorage.setItem(cartKey, JSON.stringify(cart));
-
-  alert(productName + " added to cart!");
-  console.log("Updated Cart:", JSON.parse(localStorage.getItem(cartKey))); // Debugging log
-}
-
-// Load Cart Items
-function loadCart() {
-  let currentUser = localStorage.getItem("currentUser");
-  let cartKey = currentUser ? currentUser + "_cart" : "guest_cart";
-
-  let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-  let cartDiv = document.getElementById("cart-items");
-  let totalPrice = 0;
-
-  cartDiv.innerHTML = "";
-  if (cart.length === 0) {
-    cartDiv.innerHTML = "<p>No items in cart.</p>";
-  } else {
-    cart.forEach((item, index) => {
-      cartDiv.innerHTML += `<p>${item.name} - ₹${item.price} <button onclick="removeFromCart(${index})">❌</button></p>`;
-      totalPrice += item.price;
+    products.forEach((product, index) => {
+        productList.innerHTML += `
+            <p>
+                ${product.name} - ₹${product.price} 
+                <button onclick="editProduct(${index})">✏️ Edit</button>
+                <button onclick="deleteProduct(${index})">🗑️ Delete</button>
+            </p>
+        `;
     });
-    document.getElementById("total-price").innerText = "Total: ₹" + totalPrice;
-  }
 }
 
-// Remove Item from Cart
-function removeFromCart(index) {
-  let currentUser = localStorage.getItem("currentUser");
-  let cartKey = currentUser ? currentUser + "_cart" : "guest_cart";
+// Add Product by Code
+function addProductByCode() {
+    let productCode = document.getElementById("product-code").value.trim();
+    if (!productCode) {
+        alert("Please enter a product code.");
+        return;
+    }
 
-  let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-  cart.splice(index, 1);
-  localStorage.setItem(cartKey, JSON.stringify(cart));
+    // Predefined Product List with Codes
+    let predefinedProducts = {
+        "HT001": { name: "iPhone 13", price: 60000, image: "iphone13.jpg" },
+        "HT002": { name: "Samsung Galaxy S21", price: 50000, image: "s21.jpg" },
+        "HT003": { name: "OnePlus 9", price: 45000, image: "oneplus9.jpg" }
+    };
 
-  loadCart();
+    if (!predefinedProducts[productCode]) {
+        alert("Invalid Product Code!");
+        return;
+    }
+
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    products.push(predefinedProducts[productCode]);
+    localStorage.setItem("products", JSON.stringify(products));
+
+    alert("Product Added Successfully!");
+    loadProducts();
 }
 
-// Checkout (Requires Login)
-function checkout() {
-  let currentUser = localStorage.getItem("currentUser");
-  if (!currentUser) {
-    alert("Please log in to place an order.");
-    return;
-  }
+// Edit Product
+function editProduct(index) {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let newName = prompt("Enter new product name:", products[index].name);
+    let newPrice = prompt("Enter new price:", products[index].price);
+    let newImage = prompt("Enter new image URL:", products[index].image);
 
-  let cart = JSON.parse(localStorage.getItem(currentUser + "_cart")) || [];
-  if (cart.length === 0) {
-    alert("Cart is empty!");
-    return;
-  }
-
-  let orders = JSON.parse(localStorage.getItem(currentUser + "_orders")) || [];
-  orders.push(...cart);
-  localStorage.setItem(currentUser + "_orders", JSON.stringify(orders));
-  localStorage.removeItem(currentUser + "_cart");
-
-  alert("Order Confirmed!");
-  window.location.href = "orders.html";
+    if (newName && newPrice && newImage) {
+        products[index] = { name: newName, price: newPrice, image: newImage };
+        localStorage.setItem("products", JSON.stringify(products));
+        loadProducts();
+    }
 }
 
-// Load Orders
-function loadOrders() {
-  let currentUser = localStorage.getItem("currentUser");
-  let orders = JSON.parse(localStorage.getItem(currentUser + "_orders")) || [];
-  let orderDiv = document.getElementById("order-list");
-
-  orderDiv.innerHTML = "";
-  if (orders.length === 0) {
-    orderDiv.innerHTML = "<p>No orders found.</p>";
-  } else {
-    orders.forEach(order => {
-      orderDiv.innerHTML += `<p>${order.name} - ₹${order.price}</p>`;
-    });
-  }
+// Delete Product
+function deleteProduct(index) {
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    products.splice(index, 1);
+    localStorage.setItem("products", JSON.stringify(products));
+    loadProducts();
 }
+
+// Load products on page load
+document.addEventListener("DOMContentLoaded", loadProducts);
