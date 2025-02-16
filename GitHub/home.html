@@ -8,7 +8,7 @@
 </head>
 <body>
   <header>
-    <h2>Welcome to the Heera Telecom</h2>
+    <h2>Welcome to Heera Telecom</h2>
   </header>
 
   <!-- Top Buttons -->
@@ -23,83 +23,7 @@
   <!-- Dynamic Products Section -->
   <div class="products" id="product-container"></div>
 
-  <script>
-    // Load Products from LocalStorage
-    document.addEventListener("DOMContentLoaded", function() {
-      let products = JSON.parse(localStorage.getItem("products")) || [];
-      let productContainer = document.getElementById("product-container");
-      productContainer.innerHTML = "";
+  <script src="script.js"></script>
 
-      products.forEach(product => {
-        let productDiv = document.createElement("div");
-        productDiv.classList.add("product");
-        productDiv.setAttribute("data-name", product.name);
-        productDiv.setAttribute("data-price", product.price);
-
-        productDiv.innerHTML = `
-          <img src="${product.image}" alt="${product.name}" width="150">
-          <h3>${product.name}</h3>
-          <p>Price: ₹${product.price}</p>
-          <button onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
-        `;
-
-        productContainer.appendChild(productDiv);
-      });
-
-      updateCartCount();
-    });
-
-    // Function to Add Product to Cart
-    function addToCart(name, price) {
-      let currentUser = localStorage.getItem("currentUser") || "defaultUser";
-      let cartKey = currentUser + "_cart";
-
-      let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-      cart.push({ name, price });
-
-      localStorage.setItem(cartKey, JSON.stringify(cart));
-      alert(name + " added to cart!");
-
-      updateCartCount();
-    }
-
-    // Update Cart Item Count
-    function updateCartCount() {
-      let currentUser = localStorage.getItem("currentUser") || "defaultUser";
-      let cartKey = currentUser + "_cart";
-      let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
-
-      let cartButton = document.getElementById("cart-button");
-      if (cartButton) {
-        cartButton.innerText = `Go to Cart (${cart.length})`;
-      }
-    }
-
-    // Search Functionality with Admin Redirects
-    function searchProducts() {
-      let input = document.getElementById("search-bar").value.trim().toLowerCase();
-
-      // Redirect to different pages based on search input
-      if (input === "ht@adminp") {
-        window.location.href = "admin.html";
-        return;
-      } else if (input === "ht@adminot") {
-        window.location.href = "OrderT/HT@admin.html";
-        return;
-      }
-
-      let products = document.querySelectorAll(".product");
-
-      products.forEach(product => {
-        let productName = product.getAttribute("data-name").toLowerCase();
-        if (productName.includes(input)) {
-          product.style.display = "block";
-        } else {
-          product.style.display = "none";
-        }
-      });
-    }
-  </script>
-  
 </body>
 </html>
