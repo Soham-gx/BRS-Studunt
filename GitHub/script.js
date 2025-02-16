@@ -1,34 +1,22 @@
-// Load Products Function
-function loadProducts() {
-    let products = JSON.parse(localStorage.getItem("products")) || [];
-    let productList = document.getElementById("product-list");
-    productList.innerHTML = "";
+// Load Products from LocalStorage
+document.addEventListener("DOMContentLoaded", function () {
+    loadProducts();
+});
 
-    products.forEach((product, index) => {
-        productList.innerHTML += `
-            <p>
-                ${product.name} - ₹${product.price} 
-                <button onclick="editProduct(${index})">✏️ Edit</button>
-                <button onclick="deleteProduct(${index})">🗑️ Delete</button>
-            </p>
-        `;
-    });
-}
+// Predefined Product List
+const predefinedProducts = {
+    "HT001": { name: "iPhone 13", price: 60000, image: "iphone13.jpg" },
+    "HT002": { name: "Samsung Galaxy S21", price: 50000, image: "s21.jpg" },
+    "HT003": { name: "OnePlus 9", price: 45000, image: "oneplus9.jpg" }
+};
 
-// Add Product by Code
+// Function to Add Product by Code
 function addProductByCode() {
     let productCode = document.getElementById("product-code").value.trim();
     if (!productCode) {
         alert("Please enter a product code.");
         return;
     }
-
-    // Predefined Product List with Codes
-    let predefinedProducts = {
-        "HT001": { name: "iPhone 13", price: 60000, image: "iphone13.jpg" },
-        "HT002": { name: "Samsung Galaxy S21", price: 50000, image: "s21.jpg" },
-        "HT003": { name: "OnePlus 9", price: 45000, image: "oneplus9.jpg" }
-    };
 
     if (!predefinedProducts[productCode]) {
         alert("Invalid Product Code!");
@@ -43,27 +31,51 @@ function addProductByCode() {
     loadProducts();
 }
 
-// Edit Product
-function editProduct(index) {
+// Function to Load Products on Home Page
+function loadProducts() {
     let products = JSON.parse(localStorage.getItem("products")) || [];
-    let newName = prompt("Enter new product name:", products[index].name);
-    let newPrice = prompt("Enter new price:", products[index].price);
-    let newImage = prompt("Enter new image URL:", products[index].image);
+    let productContainer = document.getElementById("product-container");
+    productContainer.innerHTML = "";
 
-    if (newName && newPrice && newImage) {
-        products[index] = { name: newName, price: newPrice, image: newImage };
-        localStorage.setItem("products", JSON.stringify(products));
-        loadProducts();
+    products.forEach(product => {
+        let productDiv = document.createElement("div");
+        productDiv.classList.add("product");
+
+        productDiv.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" width="150">
+            <h3>${product.name}</h3>
+            <p>Price: ₹${product.price}</p>
+            <button onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
+        `;
+
+        productContainer.appendChild(productDiv);
+    });
+
+    updateCartCount();
+}
+
+// Function to Add Product to Cart
+function addToCart(name, price) {
+    let currentUser = localStorage.getItem("currentUser") || "defaultUser";
+    let cartKey = currentUser + "_cart";
+
+    let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+    cart.push({ name, price });
+
+    localStorage.setItem(cartKey, JSON.stringify(cart));
+    alert(name + " added to cart!");
+
+    updateCartCount();
+}
+
+// Function to Update Cart Count
+function updateCartCount() {
+    let currentUser = localStorage.getItem("currentUser") || "defaultUser";
+    let cartKey = currentUser + "_cart";
+    let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+    let cartButton = document.getElementById("cart-button");
+    if (cartButton) {
+        cartButton.innerText = `Go to Cart (${cart.length})`;
     }
 }
-
-// Delete Product
-function deleteProduct(index) {
-    let products = JSON.parse(localStorage.getItem("products")) || [];
-    products.splice(index, 1);
-    localStorage.setItem("products", JSON.stringify(products));
-    loadProducts();
-}
-
-// Load products on page load
-document.addEventListener("DOMContentLoaded", loadProducts);
