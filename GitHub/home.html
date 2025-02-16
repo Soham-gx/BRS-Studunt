@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home | Art Store</title>
+  <title>Home | Heera Telecom</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -17,10 +17,11 @@
     <a href="OrderT/index.html"><button>Order Track</button></a> 
   </div>
 
-  <!-- Search Bar -->
-  <input type="text" id="search-bar" placeholder="Search products..." onkeyup="searchProducts()" style="width: 80%; padding: 8px; margin: 20px auto; display: block; border: 1px solid #ccc; border-radius: 5px;">
+  <!-- Product Code Input -->
+  <input type="text" id="product-code" placeholder="Enter Product Code">
+  <button onclick="addProductByCode()">Add Product</button>
 
-  <!-- Dynamic Products Section -->
+  <!-- Product List -->
   <div class="products" id="product-container"></div>
 
   <script src="script.js"></script>
