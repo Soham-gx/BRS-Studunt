@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const songList = document.getElementById('song-list');
     const audioPlayer = document.getElementById('audio-player');
     let audioContext;
+    let currentSongIndex = 0;
 
     // Function to initialize AudioContext
     function initAudioContext() {
@@ -14,24 +15,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // List of songs (from "songs" folder)
     const songs = [
-        'Nadaaniyan Akshath 320 Kbps.mp3',
+        'song1.mp3',
         'song2.mp3',
         'song3.mp3'
     ];
 
     // Display songs in the list
-    songs.forEach(song => {
+    songs.forEach((song, index) => {
         const songItem = document.createElement('div');
         songItem.classList.add('song-item');
         songItem.textContent = song;
 
         songItem.addEventListener('click', () => {
-            initAudioContext();
-            audioPlayer.src = `songs/${song}`;
-            audioPlayer.play();
+            playSong(index);
         });
 
         songList.appendChild(songItem);
+    });
+
+    // Function to play song based on index
+    function playSong(index) {
+        currentSongIndex = index;
+        initAudioContext();
+        audioPlayer.src = `songs/${songs[index]}`;
+        audioPlayer.play();
+    }
+
+    // Automatically play next song when current one ends
+    audioPlayer.addEventListener('ended', () => {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        playSong(currentSongIndex);
     });
 
     // Background playback enable
