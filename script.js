@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // List of songs (from "songs" folder)
     const songs = [
-        'song1.mp3',
+        'Nadaaniyan Akshath 320 Kbps.mp3',
         'song2.mp3',
         'song3.mp3'
     ];
