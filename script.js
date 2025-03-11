@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // List of songs (from "songs" folder)
     const songs = [
         'Nadaaniyan Akshath 320 Kbps.mp3',
-        'song2.mp3',
+        'songs/Best of Arijit Singh Mashup 2024 ｜ AMEET Mashup ｜ Arijit Singh Love Songs ｜ Best of Love Songs 2024 2.mp3',
         'song3.mp3'
     ];
 
