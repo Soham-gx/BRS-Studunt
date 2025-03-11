@@ -1,35 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Heera Telecom - E-commerce</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Music Player</title>
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <div class="nav-left">
-        <span class="store-name">Heera Telecom</span>
-      </div>
-      <div class="nav-center">
-        <input type="text" class="search-bar" placeholder="Search for products...">
-      </div>
-      <div class="nav-right">
-        <a href="login.html" class="login-link">Login</a>
-        <a href="signup.html" class="signup-link">SignUp</a>
-        <a href="cart.php" class="cart-link">Cart</a>
-      </div>
-    </nav>
-  </header>
 
-  <main>
-    <h1>Welcome to Heera Telecom</h1>
-    <div id="product-container">
-      <!-- Products will be dynamically loaded here -->
-    </div>
-  </main>
+<div class="player-container">
+    <h1>Heera Telecom Music Player</h1>
+    <div id="song-list"></div>
+    <audio id="audio-player" controls></audio>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
