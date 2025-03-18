@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Chat</title>
+</head>
+<body>
+    <div class="chat-container">
+        <h2>Welcome to the Chat</h2>
+        <div>
+            <select id="recipient">
+                <option value="Simran">Simran</option>
+                <option value="Janu">Janu</option>
+                <option value="Kunal">Kunal</option>
+                <option value="Harshu">Harshu</option>
+            </select>
+        </div>
+        <div id="chat-box"></div>
+        <div class="input-container">
+            <input type="text" id="message" placeholder="Type a message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const username = "<?php session_start(); echo $_SESSION['username']; ?>";
+
+        function loadMessages() {
+            const recipient = document.getElementById('recipient').value;
+            fetch(`get_messages.php?recipient=${recipient}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('chat-box').innerHTML = data;
+                });
+        }
+
+        function sendMessage() {
+            const recipient = document.getElementById('recipient').value;
+            const message = document.getElementById('message').value;
+
+            if (message.trim() !== "") {
+                fetch('send_message.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `recipient=${recipient}&message=${message}`
+                }).then(() => {
+                    loadMessages();
+                    document.getElementById('message').value = '';
+                });
+            }
+        }
+
+        document.getElementById('recipient').addEventListener('change', loadMessages);
+        setInterval(loadMessages, 1000);
+        loadMessages();
+    </script>
+</body>
+</html>

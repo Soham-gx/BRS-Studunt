@@ -1,19 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Music Player</title>
+    <title>Login</title>
 </head>
 <body>
-
-<div class="player-container">
-    <h1>Heera Telecom Music Player</h1>
-    <div id="song-list"></div>
-    <audio id="audio-player" controls></audio>
-</div>
-
-<script src="script.js"></script>
+    <div class="login-container">
+        <form action="login.php" method="POST">
+            <h2>Login</h2>
+            <input type="text" name="username" placeholder="Username" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <button type="submit">Login</button>
+        </form>
+    </div>
 </body>
 </html>
